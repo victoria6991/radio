@@ -24,7 +24,7 @@ public class RadioTest {
     }
 
     @Test
-    void setStation() {
+    void setStation8() {
         Radio radio = new Radio();
         radio.setCurrentStation(8);
         int expected = 8;
@@ -33,7 +33,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToNextStationWithCurrent0() {
+    void switchToNextStationWhenCurrentIs0() {
         Radio radio = new Radio();
         radio.nextStation();
         int expected = 1;
@@ -43,7 +43,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToNextStationWithCurrent9() {
+    void switchToNextStationWhenCurrentIS9() {
         Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.nextStation();
@@ -65,7 +65,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToNextStationWithCurrent1() {
+    void switchToNextStationWhenCurrentIs1() {
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.nextStation();
@@ -76,7 +76,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToPrevStationWithCurrent0() {
+    void switchToPrevStationWhenCurrentIs0() {
         Radio radio = new Radio();
         radio.prevStation();
         int expected = 9;
@@ -86,7 +86,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToPrevStationWithCurrent9() {
+    void switchToPrevStationWhenCurrentIs9() {
         Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.prevStation();
@@ -97,7 +97,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToPrevStationWithCurrent1() {
+    void switchToPrevStationWhenCurrentIs1() {
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.prevStation();
@@ -108,18 +108,7 @@ public class RadioTest {
     }
 
     @Test
-    void switchToPrevStationWithCurrent2() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(2);
-        radio.prevStation();
-        int expected = 1;
-        int actual = radio.getCurrentStation();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void switchToPrevStationWithCurrent8() {
+    void switchToPrevStationWhenCurrentIs8() {
         Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.prevStation();
@@ -150,17 +139,17 @@ public class RadioTest {
     }
 
     @Test
-    void decreaseVolume() {
+    void decreaseVolumeWhenCurrentIsMax() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(10);
         radio.decreaseVolume();
-        int expected = 8;
+        int expected = 9;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
     }
 
     @Test
-    void decreaseVolumeToMin() {
+    void decreaseVolumeToPossibleMin() {
         Radio radio = new Radio();
         radio.setCurrentVolume(1);
         radio.decreaseVolume();
@@ -173,6 +162,16 @@ public class RadioTest {
     void decreaseVolumeLowerThanMin() {
         Radio radio = new Radio();
         radio.setCurrentVolume(0);
+        radio.decreaseVolume();
+        int expected = 0;
+        int actual = radio.getVolume();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void decreaseVolumeWhenCurrentVolumeIsIrrelevant() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(12);
         radio.decreaseVolume();
         int expected = 0;
         int actual = radio.getVolume();
