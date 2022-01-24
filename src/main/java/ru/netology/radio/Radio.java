@@ -20,12 +20,10 @@ public class Radio {
     }
 
     public void nextStation() {
-        if (currentStation <= 8) {
-            this.currentStation = currentStation + 1;
-        }
         if (currentStation == 9) {
             this.currentStation = 0;
-        }
+            return;
+        } else this.currentStation = currentStation + 1;
     }
 
     public void prevStation() {
